@@ -1,13 +1,12 @@
 ﻿Module Module1
     'Robert Ince 
     'OCR Applied ICT GCE Unit 8: Task 1 - Calculator
-    Dim sum As String
-    Dim total As Double = 0
+    Dim _sum As String
+    Dim _total As Double = 0
     '------------------------------------------------------------------------------------
-    Sub initialise()
-        Dim i As Integer
-        total = 0
-        sum = ""
+    Sub Initialise()
+        _total = 0
+        _sum = ""
 
         For i = 0 To 4
             Console.WriteLine(Environment.NewLine)
@@ -20,7 +19,7 @@
     End Sub
     '------------------------------------------------------------------------------------
     Public Function get_operator() As String
-        Dim op As String = ""
+        Dim op
 
         Do
             Console.WriteLine("Please enter an operator (+, -, /, *, =")
@@ -37,9 +36,8 @@
     End Function
     '------------------------------------------------------------------------------------
     Public Function get_num()
-        Dim the_num As String
+        Dim theNum As String
         Dim num As Double
-        Dim i As Integer
 
         Do
             For i = 0 To 2
@@ -47,46 +45,45 @@
             Next
 
             Console.WriteLine("Enter a number: ")
-            the_num = Console.ReadLine
+            theNum = Console.ReadLine
 
-            If Not IsNumeric(the_num) Then
+            If Not IsNumeric(theNum) Then
                 Console.WriteLine("Invalid number try again")
             End If
 
-        Loop While Not IsNumeric(the_num)
-        num = the_num
+        Loop While Not IsNumeric(theNum)
+        num = theNum
         Return num
     End Function
     '------------------------------------------------------------------------------------
     Sub Main()
-        Dim i As Integer = 0
         Dim op As String
         Dim num As Double
-        Dim this_num As String
-        Dim go_again As String
+        Dim thisNum As String
+        Dim goAgain As String
 
         Do
             initialise()
             Do
                 num = get_num()
-                this_num = Convert.ToString(num)
-                sum = String.Concat(sum, this_num)
+                thisNum = Convert.ToString(num)
+                _sum = String.Concat(_sum, thisNum)
 
                 Select Case op
                     Case "+"
-                        total = total + num
+                        _total = _total + num
                     Case "-"
-                        total = total - num
+                        _total = _total - num
                     Case "/"
-                        total = total / num
+                        _total = _total / num
                     Case "*"
-                        total = total * num
+                        _total = _total * num
                     Case Else
-                        total = num
+                        _total = num
                 End Select
 
                 op = get_operator()
-                sum = String.Concat(sum, op)
+                _sum = String.Concat(_sum, op)
 
             Loop Until op = "="
 
@@ -94,12 +91,12 @@
                 Console.WriteLine(Environment.NewLine)
             Next
 
-            Console.WriteLine(sum & total)
+            Console.WriteLine(_sum & _total)
 
             Console.WriteLine("Another Go? (Y/N)")
-            go_again = Console.ReadLine
+            goAgain = Console.ReadLine
 
-        Loop While go_again = "y" Or go_again = "Y"
+        Loop While goAgain = "y" Or goAgain = "Y"
     End Sub
 
 End Module
